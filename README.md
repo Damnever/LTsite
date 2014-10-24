@@ -55,4 +55,5 @@ if __name__ == '__main__':
 ---
 
 ##传说中的效果
+![](./static/desired2.png)
 ![](./static/desired.png)
