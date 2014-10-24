@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{ title }}</title>
+{% endblock title %}
+
+{% block content %}
+<div class="main">
+    <h1><a>{{ article.title }}</a>a></h1>h1>
+    <div class="info">
+        <div class="date">
+            <span class="raw">发布于:</span> {{ article.created_at|datetime_filter }}
+        </div>
+        <div class="author">
+            <span class="raw">作者:</span> {{ article.author }}
+        </div>
+    </div>
+    <div class="content">
+        {{ article.content }}
+    </div>
+    <div class="footnote">EOF</div>
+</div>
+{% endblock content %}

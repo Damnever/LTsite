@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Talk</title>
+        <link rel="icon" type="image/x-icon" href="../favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+        <link rel="stylesheet" type="text/css" href="../static/css/talk.css">
+    </head>
+    <body>
+        <fieldset>
+        <legend>说点什么吧！</legend>
+        <div class="talk">
+            <form action="/talk" method="POST">
+                <input type="text" name="content" placeholder="内容"/>
+                <button type="submit">发送</button>
+            </form>
+        </div>
+        <hr />
+        <strong>You said:</strong>
+        <blockquote>
+            <p>{{ content }}</p>
+        </blockquote>
+        </fieldset>
+    </body>
+</html>

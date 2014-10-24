@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head_link %}
+		<link rel="stylesheet" type="text/css" href="../static/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/list.css" />
+		<script src="../static/js/toc_js/modernizr.custom.js"></script>
+{% endblock head_link %}
+
+{% block content %}
+<div class="list">
+	<section class="grid-wrap">
+		<ul class="grid swipe-down" id="grid">
+            {% for article in articles %}
+                <li><a href="/{{ article.main_tag }}/{{ article.created_at }}">
+                    <div id="summary">{{ article.content|summary_filter }}</div>
+                    <h3>{{ article.title }}</h3>
+                </a></li>
+            {% endfor %}
+		</ul>
+	</section>
+</div>
+{% endblock content %}
+
+{% block foot_script %}
+	<script src="../static/js/toc_js/masonry.pkgd.min.js"></script>
+	<script src="../static/js/toc_js/imagesloaded.pkgd.min.js"></script>
+	<script src="../static/js/toc_js/classie.js"></script>
+	<script src="../static/js/toc_js/colorfinder-1.1.js"></script>
+	<script src="../static/js/toc_js/gridScrollFx.js"></script>
+	<script>
+	new GridScrollFx( document.getElementById( 'grid' ), {
+		viewportFactor : 0.4
+	});
+	</script>
+	<script src="../js/jquery-2.1.1.min.js"></script>
+{% endblock foot_script %}

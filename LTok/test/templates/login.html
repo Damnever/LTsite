@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>登录</title>
+        <link rel="icon" type="image/x-icon" href="../favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+        <style type="text/css">
+            body {
+                margin: 0 auto;
+                width: 600px;
+            }
+            fieldset {
+                margin: 15% 0 auto 0;
+                padding: 5% 8% 5% 8%;
+                border: 2px solid #9c9c9c;
+                background: #9c9c9c;
+            }
+            legend {
+                color: #FF4500;
+                font-size: 23px;
+                font-weight: bold;
+                text-shadow: 2px 2px 2px #363636;
+            }
+            .bd {
+                width: 500px;
+                height: 30px;
+                margin: 10px 15px 10px 15px;
+                padding: 10px;
+                border: 1px solid #555;
+                background-color: #FAFAFA;
+            }
+            .bd input {
+                margin: 0 10px 0 10px;
+                padding: 5px;
+                width: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <fieldset>
+            <legend>请登录:</legend>
+            <form action="/login" method='POST'>
+                <div class="bd">
+                    <input type="text" name="name" placeholder="姓名"/>
+                    <button type="sumit">提交</button>
+                </div>
+            </form>
+        </fieldset>
+    </body>
+</html>

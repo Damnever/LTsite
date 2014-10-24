@@ -1,0 +1,404 @@
+@font-face {
+    font-family: 'xk';
+	src: url("./fonts/xk.eot");/*IE*/
+    src: url("./fonts/xk.woff") format('woff')
+         url('./fonts/xk.ttf') format('truetype');
+}
+
+body {
+
+	background: #444;
+	color: #48a770;
+	font-weight: 300;
+	font-family: "Hiragino Sans GB", Lucida Sans Unicode, Hiragino Sans GB, Consolas, Courier New, WenQuanYi Micro Hei, Verdana, "Microsoft YaHei","WenQuanYi Micro Hei", Aril, sans-serif;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	display: table;
+	content: " ";
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.codrops-header,
+.codrops-top {
+	font-family: 'Lato', Arial, sans-serif;
+}
+
+.codrops-header {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.codrops-header h1 {
+	margin: 0;
+}
+
+.codrops-header span {
+	display: block;
+	padding: 0 0 0.6em 0.1em;
+	font-size: 60%;
+	color: #aca89a;
+}
+
+/* To Navigation Style */
+
+
+.sidebar {
+    position: fixed;
+    float: left;
+    width: 5%;
+    height: 100%;
+}
+
+.main {
+    background: #FFFAFA;
+    max-width: 1090px;
+    margin: 5% 10% 2% 10%;
+    padding: 3% 7% 4% 7%;
+    border: 2px solid #B5B5B5;
+    border-radius: 10px 10px 10px;
+}
+
+.list {
+    background: #444;
+	font-size: 100%;
+	line-height: 1.25;
+	font-weight: 300;
+    max-width: 1090px;
+    margin: 5% 10% 2% 10%;
+    /*padding: 3% 7% 4% 7%;*/
+    border: 2px solid #B5B5B5;
+    border-radius: 10px 10px 10px;
+}
+
+.content {
+    color: #000000;
+    font-size: 20px;    
+    line-height: 1.6em;
+    padding: 1.5em .3em 1.5em .3em;
+    border-top: 5px solid #8B7355; /*#8B7355*/
+    border-bottom: 5px solid #8B7355; /*#8B7355*/
+    border-radius: 10px;
+}
+
+h1 {
+    color: #8B7355;
+    cursor: pointer;
+    font-size: 2.3em;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    /*font-size: 30px;*/
+    text-shadow: 3px 3px 3px #000000;
+}
+
+.info {
+    padding: 0 10% .3em 5%;
+}
+
+.date {
+    float: left;
+    color: #8B8B7A;
+    font-weight: bold;
+    text-align: left;
+}
+
+.author {
+    color: #8B8B7A;
+    font-weight: bold;
+    text-align: right;
+}
+
+.raw {
+    color: #8B7355;
+}
+
+.footnote {
+    color: #CD853F;
+    font-size: 1.3em;
+    font-weight: bold; 
+    letter-spacing: 1em;
+    padding-top: 1em;
+    text-align: center;
+    font-family: "xk", Courier;
+}
+
+footer {
+    margin: .5em 33% 1.5em 33%;
+    padding: .2em 1em .2em 1em;
+    color: #FF4500;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 2px #1C1C1C;
+    background: #9C9C9C;
+    border: 1px solid #9C9C9C;
+    border-radius: 5px;
+}
+
+footer a {
+    color: #FF7F00;
+    text-decoration: none;
+    font-family: "xk", Courier;
+}
+
+footer a:hover {
+    color: #FF4500;
+    opacity: .8;
+    text-shadow: 1px 1px 1px #1C1C1C;
+}
+
+h1 a:hover,h1 a:focus {
+	opacity: .8;
+	/*outline: none;*/
+    text-shadow: 2px 2px 1px #000000;
+
+}
+
+.sidebar button {
+
+    /*height: 16267px;*/
+    margin: 300% 0 auto 50%;
+    padding: 10% 3% 10% 3%;
+	background: #B5B5B5;
+    font-size: 3.2em;
+	color: #FFFF00;
+    text-shadow: 4px 4px 4px #000000;
+    opacity: 1;
+	cursor: pointer;
+    border: 1px solid #9C9C9C;
+    border-radius: 3px 3px 3px;
+    font-family: "xk", Courier;
+}
+
+.sidebar button:hover {
+    text-shadow: 2px 2px 1px #000000;
+    color: #FFFF00;
+    opacity: .9;
+}
+
+#active {
+    background: rgba(0,0,0,0.3);
+	box-shadow: inset 0 -1px rgba(0,0,0,0);
+	color: #fff;
+    text-shadow: 1px 1px 2px #1C1C1C;
+}
+
+
+
+/*****************effect************************/
+
+*,
+
+*:after,
+*::before {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html,
+body,
+.st-container,
+.st-pusher,
+.st-content {
+    height: 100%;
+}
+
+.st-content {
+	overflow-y: scroll;
+    background: #B5B5B5;
+}
+
+.st-content,
+.st-content-inner {
+	position: relative;
+}
+
+.st-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.st-pusher {
+	position: relative;
+	left: 0;
+	z-index: 99;
+	height: 100%;
+	-webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    -o-transition: -o-transform 0.5s;
+	transition: transform 0.5s;
+}
+
+.st-pusher::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+    width: 0;
+	height: 0;
+	background: rgba(0,0,0,0.2);
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -moz-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -o-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+	transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+.st-menu-open .st-pusher::after {
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.st-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	visibility: hidden;
+	width: 200px;
+	height: 100%;
+	background: #8B8970; /*#48a770*/
+	-webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.st-menu::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.2);
+	content: '';
+	opacity: 1;
+	-webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.st-menu-open .st-menu::after {
+	width: 0;
+	height: 0;
+	opacity: 0;
+	-webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -moz-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    -o-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+	transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+/* content style */
+.st-menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.st-menu h2 {
+	margin: 0;
+	padding: 1.2em 1em 1em .8em;
+	color: rgba(0,0,0,0.4);
+    letter-spacing: 0.3em;
+	text-shadow: 0 0 3px #fefcc9, 2px -2px 3px #feec85, -3px -3px 6px #ffae34, 3px -6px 8px #ec760c, -3px -10px 10px #cd4606, 0 -15px 13px #973716, 2px -18px 20px #451b0e;
+	font-weight: bold;
+	font-size: 2.3em;
+    font-family: "xk", Courier;
+}
+
+.st-menu ul li a {
+	display: block;
+	padding: .8em .8em .6em 1.8em;
+	outline: none;
+	box-shadow: inset 0 -1px rgba(0,0,0,0.2);
+	color: #f3efe0;
+    background: #8B8970;
+	text-transform: uppercase;
+	text-shadow: 0 0 1px rgba(255,255,255,0.1);
+	word-spacing: 1em;
+    text-decoration: none;
+    font-size: 23px;
+	font-weight: blod;
+    text-shadow: 2px 2px 3px #1C1C1C;
+	-webkit-transition: background 0.3s, box-shadow 0.3s;
+    -moz-transition: background 0.3s, box-shadow 0.3s;
+    -o-transition: background 0.3s, box-shadow 0.3s;
+	transition: background 0.3s, box-shadow 0.3s;
+}
+
+.st-menu ul li:first-child a {
+	box-shadow: inset 0 -1px rgba(0,0,0,0.2), inset 0 1px rgba(0,0,0,0.2);
+}
+
+.st-menu ul li a:hover {
+	background: rgba(0,0,0,0.2);
+	box-shadow: inset 0 -1px rgba(0,0,0,0);
+	color: #fff;
+    text-shadow: 1px 1px 2px #1C1C1C;
+}
+
+/* Individual effects */
+
+/* Effect 11: Scale and rotate pusher */
+.st-effect-11.st-container {
+	-webkit-perspective: 1500px;
+    -moz-perspective: 1500px;
+    -o-perspective: 1500px;
+	perspective: 1500px;
+}
+
+.st-effect-11 .st-pusher {
+	-webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.st-effect-11.st-menu-open .st-pusher {
+	-webkit-transform: translate3d(100px, 0, -600px) rotateY(-20deg);
+    -moz-transform: translate3d(100px, 0, -600px) rotateY(-20deg);
+    -o-transform: translate3d(100px, 0, -600px) rotateY(-20deg);
+	transform: translate3d(100px, 0, -600px) rotateY(-20deg);
+}
+
+.st-effect-11.st-menu {
+	opacity: 1;
+	-webkit-transform: translate3d(-100%, 0, 0);
+    -moz-transform: translate3d(-100%, 0, 0);
+    -o-transform: translate3d(-100%, 0, 0);
+	transform: translate3d(-100%, 0, 0);
+}
+
+.st-effect-11.st-menu-open .st-effect-11.st-menu {
+	visibility: visible;
+	-webkit-transition: -webkit-transform 0.5s;
+    -moz-transform: -moz-transform 0.5s;
+    -o-transform: -o-transform 0.5s;
+	transition: transform 0.5s;
+	-webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.st-effect-11.st-menu::after {
+	display: none;
+}
+
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
+.no-csstransforms3d .st-pusher,
+.no-js .st-pusher {
+	padding-left: 300px;
+}

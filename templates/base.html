@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="renderer" content="webkit">
+        <meta name="renderer" content="ie-comp">
+        <meta name="renderer" content="ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block title %}
+        <title>首页</title>
+        {% endblock title%}
+		<link rel="stylesheet" type="text/css" href="../static/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/sidebar.css"/>
+		<script src="../static/js/nav_js/modernizr.custom.js"></script>
+		<script src="../static/js/jquery-2.1.1.min.js"></script>
+
+        {% block head_link %}{% endblock head_link %}
+	</head>
+	<body>
+		<div id="st-container" class="st-container">
+			<nav class="st-menu st-effect-11" id="menu-11">
+				<h2>D2AK</h2>
+				<ul>
+					<li><a href="/" rel='nav.html#1'>首 页</a></li>
+					<li><a href="/coding" rel='nav.html#2'>编 程</a></li>
+					<li><a href="/collections" rel='nav.html#3'>收 刮</a></li>
+					<li><a href="/bushit" rel='nav.html#4'>扯 淡</a></li>
+					<li><a href="/about" rel='nav.html#5'>关 于</a></li>
+				</ul>
+			</nav>
+			<!-- content push wrapper -->
+			<div class="st-pusher">
+				<div class="st-content"><!-- this is the wrapper for the content -->
+					<div id="st-trigger-effects"  class="sidebar">
+						<button title="浏览器内核是IE系列并且版本低于10的别点了，另外360这流氓..." data-effect="st-effect-11">导航</button>
+					</div>
+                    <!--div class="main"-->
+                        {% block content %}{% endblock content %}
+                    <!--/div-->
+                    <footer>Powered by <a href="http://weibo.com/u/1977691952?wvr=5&wvr=5&lf=reg" target="blank">Last_D</a>. All right reserved.</footer>
+				</div><!-- /st-content -->
+			</div><!-- /st-pusher -->
+        </div><!-- /st-container -->
+
+        {% block foot_script %}{% endblock foot_script %}
+
+		<script src="../static/js/nav_js/classie.js"></script>
+		<script src="../static/js/nav_js/sidebarEffects.js"></script>
+        <script type="text/javascript">
+            // Setting navbar active.
+            $(document).ready(function(){
+                var urlstr = location.href;
+                $("nav a").each(function () {
+                    if ((urlstr).indexOf($(this).attr('rel')) > -1 && $(this).attr('rel') != '') {
+                        $(this).attr(
+                            {"id": "active"}
+                        );
+                    } else {
+                        $(this).attr(
+                            {"id": ""}
+                        );
+                    }
+                });
+            });
+        </script>
+	</body>
+</html>
