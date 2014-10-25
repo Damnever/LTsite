@@ -5,8 +5,9 @@
 - [RFC 2616 (HTTP协议)](http://www.faqs.org/rfcs/rfc2616.html)
 - [RFC 2109 (Cookie)](https://www.ietf.org/rfc/rfc2109.txt)
 - [Web Python (CGI&WSGI)](http://webpython.codepoint.net/) & [译文](http://www.xefan.com/archives/84004.html)
--  [PEP333](http://www.python.org/dev/peps/pep-0333) & [译文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
+-  [PEP333 (Python Web Server Gateway Interface v1.0)](http://www.python.org/dev/peps/pep-0333) & [译文](http://www.cnblogs.com/laozhbook/p/python_pep_333.html)
 - [Serving Static Content With WSGI](http://pwp.stevecassidy.net/wsgi/static.html)
+- [ PEP 249 (Python Database API Specification v2.0)](http://legacy.python.org/dev/peps/pep-0249/) & [不完全译文](http://blog.csdn.net/dajianshi/article/details/7482201)
 
 我就寻思着自己也倒腾一个自己理解的轻量级框架，既然廖老师的路由用的装饰器，看来我就不能这么搞了，不然我也就如同 The walking dead 了。好吧！用了我理解中的元类，然后这货长得有点像 Tornado 了，但是完全没有异步特性 ...
 
