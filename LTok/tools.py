@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-13 11:04:52 Mon
-    Last Modified: 2014-10-13 11:53:33 Mon
+    Last Modified: 2014-10-25 15:23:25 Sat
     Description:
         Some Tools for web framwork.
         A dict object but support access as x.y style.
@@ -57,8 +57,10 @@ class Dict(dict):
         ...
     AttributeError: 'Dict' object has no attribute 'empty'
     """
-    def __init__(self, **kwargs):
+    def __init__(self, names=(), values=(), **kwargs):
         super(Dict, self).__init__(**kwargs)
+        for k, v in zip(names, values):
+            self[k] = v
 
     def __getattr__(self, key):
         try:
