@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-23 11:29:22 Thu
-    Last Modified: 2014-10-24 22:42:31 Fri
+    Last Modified: 2014-10-25 13:37:26 Sat
     Description:
         Some use-defined Jinja2 filter.
     Change Activity:
@@ -58,7 +58,8 @@ def _get_plain_text(html, l=None):
     body = re.search(r'<body>.+?</body>', html)
     if body:
         body = body.group()
-    body = html
+    else:
+        body = html
     parser = MyHTMLParser()
     parser.feed(body)
     return ' '.join(l)
