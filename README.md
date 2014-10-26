@@ -1,4 +1,4 @@
-#正在策划中的个人小站
+#Errors should never pass silently.
 
 学习 Python 也半年有余了，但感觉学的一塌糊涂。刚开始的时候由于非常浮躁，【xxx: “Python 太简单了”，xxx: “当天下午入门，第二天就接手公司项目” ...】 我特么难道是傻X? 直接上手 Python3，看了几天 《Python 核心编程》，又看了几天 Django book ... 又找寻什么框架上手更简单，期间了解了一下 HTML, CSS, JS ... 开始用 Tornado 也仅限使用 RequestHandler 类搞几个简单页面。
 真正学到点东西是看[廖老师的实战](http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001397616003925a3d157284cd24bc0952d6c4a7c9d8c55000)以及某位大神的一份学习[笔记](https://github.com/qyuhen/book)，第一遍看得一知半解，然后暑假做了几天服务员就这么废了，回到学校又重新学习了下，期间也了解了标准库里的一些模块，做了点[笔记(差不多是一个待学列表加平时收刮的一些资源)](https://github.com/Damnever/Note)，才渐渐靠近正轨。廖老师实战里的 Web 框架也有些地方看得一知半解 ... Google 在手，天下我有:
@@ -22,12 +22,12 @@
 - 些许前端页面
 - 使用 Markdown2 因为他可以不用安装，而且应用可能部署在 SAE 上面(穷)
 - ORM **"引用"**完成
+- MySQL 脚本
 
 > **待完成**：
 - 文档
 - 更详细的 Log 信息输出(直戳硬伤-En)
 - 用 Json 传数据 ?
-- MySQL 脚本
 - 后台管理
 - 评论
 - N++ >>> Done！I'm walking with Jesus ......
