@@ -58,10 +58,12 @@ if __name__ == '__main__':
 
 ---
 
-##传说中的效果（索命翔王--前端）
+##索命翔王--前端（Fuck off , IE!）
 ![](./static/desired2.png)
 主页
 ![](./static/desired.png)
 文章
 ![](./static/admin.png)
 后台
+![](./static/edit.png)
+编辑
