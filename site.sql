@@ -24,10 +24,12 @@ create table `users` (
 ) engine=innodb default charset=utf8;
 
 -- articles table. `created_at` in Python `int(time.time())`.
+-- `content`: html format for display. `raw_content`: Markdown for update.
 create table `articles` (
     `id` integer not null auto_increment,
     `title` varchar(255) not null,
     `content` mediumtext not null,
+    `raw_content` mediutext not null,
     `created_at` integer not null,
     `author` varchar(50) not null,
     `category` varchar(50) not null,
