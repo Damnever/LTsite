@@ -60,4 +60,8 @@ if __name__ == '__main__':
 
 ##传说中的效果
 ![](./static/desired2.png)
+主页
 ![](./static/desired.png)
+文章
+![](./static/admin.png)
+后台
