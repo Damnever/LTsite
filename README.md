@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
 ---
 
-##传说中的效果
+##传说中的效果（索命翔王--前端）
 ![](./static/desired2.png)
 主页
 ![](./static/desired.png)
