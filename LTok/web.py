@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-15 13:31:52 Wed
-    Last Modified: 2014-10-24 21:08:35 Fri
+    Last Modified: 2014-10-28 22:30:20 Tue
     Description:
         A simple WSGI web framework. To re-invent the wheel, just for the
         purpose, better and easier to understand and use others' framework.
@@ -248,6 +248,11 @@ class Jinja2TemplateEngine(Template):
     def add_filter(self, name, func):
         """Add filter function."""
         self._env.filters[name] = func
+
+    def add_filters(self, **filters):
+        """Add more than one filters."""
+        for name, func in filters:
+            self.add_filter(name, func)
 
     def render(self, template_name, **kw):
         template = self._env.get_template(template_name)
