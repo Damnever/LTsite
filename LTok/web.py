@@ -251,7 +251,7 @@ class Jinja2TemplateEngine(Template):
 
     def add_filters(self, **filters):
         """Add more than one filters."""
-        for name, func in filters:
+        for name, func in filters.iteritems():
             self.add_filter(name, func)
 
     def render(self, template_name, **kw):
