@@ -58,11 +58,13 @@ if __name__ == '__main__':
 
 ---
 
-##索命翔王--前端（Fuck off , IE!）
+##索命翔王--前端（整个进度都变缓了）
 ![](./static/desired2.png)
 主页
 ![](./static/desired.png)
 文章
+![](./static/about.png)
+关于
 ![](./static/admin.png)
 后台
 ![](./static/edit.png)
