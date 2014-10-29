@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-15 13:31:52 Wed
-    Last Modified: 2014-10-28 22:30:20 Tue
+    Last Modified: 2014-10-29 16:52:15 Wed
     Description:
         A simple WSGI web framework. To re-invent the wheel, just for the
         purpose, better and easier to understand and use others' framework.
@@ -23,6 +23,8 @@
             `^C` will raises `error: [Errno 32] Broken pipe`.
         - Fix error when redirect to new url and add a middle page for manual
         redirection.
+        - Legacy bug:
+            I hava no idea about static file path equals ot web page path.
 --------------------------------------------------------------------------------
 """
 
@@ -358,9 +360,7 @@ class App(object):
 
     def _get_static_file_prefix(self):
         """Get prefix of static file diretory."""
-        if self._static_path == 'static':
-            return '/static'
-        return os.path.split(self._static_path)[1]
+        return '/' + os.path.split(self._static_path)[1]
 
     def set_log_level(self, level=logging.INFO):
         """
@@ -442,8 +442,11 @@ class App(object):
             start_response(g.response.status, g.response.headers)
             return data
         # deal with static file
-        if path_info.startswith(self._get_static_file_prefix()):
-            data = self.wrap_file(path_info)
+        # I have no idea if static file path equals to web page path
+        static_pos =  path_info.find(self._get_static_file_prefix())
+        if static_pos != -1:
+            static_path = path_info[static_pos:]
+            data = self.wrap_file(static_path)
             start_response(g.response.status, g.response.headers)
             return data
         raise HttpError(404)
