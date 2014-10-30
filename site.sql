@@ -59,7 +59,7 @@ create table `comments` (
     `id` integer not null auto_increment,
     `article_id` integer not null,
     `username` varchar(50) not null,
-    `content` mediutext not null,
+    `content` mediumtext not null,
     `created_at` integer not null,
     primary key (`id`)
 ) engine=innodb default charset=utf8;
