@@ -12,7 +12,7 @@ use ltok;
 -- grant permission
 grant select, insert, update, delete on ltok.* to 'LTok'@'localhost' identified by 'LTok';
 
--- users table, `id` in Python `'%s%018d' % (uuid.uuid4().hex, int(time.time()*100000))))`.
+-- users table, `id` in Python `'%s%018d' % (uuid.uuid4().hex, int(time.time()*100000))`.
 create table `users` (
     `id` varchar(50) not null,
     `name` varchar(50) not null,
@@ -29,7 +29,7 @@ create table `articles` (
     `id` integer not null auto_increment,
     `title` varchar(255) not null,
     `content` mediumtext not null,
-    `raw_content` mediutext not null,
+    `raw_content` mediumtext not null,
     `created_at` integer not null,
     `author` varchar(50) not null,
     `category` varchar(50) not null,
@@ -67,4 +67,4 @@ create table `comments` (
 -- insert admin to users.
 insert into users(`id`, `name`, `password`, `email`, `admin`)
 values('c60cdb9b918342faaa8f19be2f03ea63000141433017724118',
-    'LTok', 'you will never guess', 'dxc_wolf@163.com', 1);
+    'LTok', '05c98c6c62fa4865fdc5f8717ddfc2c0b1f83f57', 'dxc_wolf@163.com', 1);
