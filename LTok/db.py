@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-10-26 20:04:04 Sun
+    Last Modified: 2014-10-31 00:19:09 Fri
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
@@ -36,7 +36,7 @@ engine = None
 class _Engine(object):
 
     def __init__(self, connect):
-        self._connect = connect
+        self._connect = connect()
 
     def get_connect(self):
         return self._connect
@@ -47,17 +47,16 @@ def init_db(user, passwd, db, host='localhost', port=3306, **kwargs):
     global engine
     if engine is not None:
         raise DatabaseError('Engine is already initialized.')
-    params = dict(user=user, password=passwd, database=db, host=host, port=port)
-    defaults = dict(use_unicode=True, charset='utf8', \
-            collation='utf8_general_ci', autocommit=False, buffered=True)
-    params.update(defaults)
-    del defaults
+    params = dict(user=user, passwd=passwd, db=db, host=host, port=int(port))
+    defaults = dict(use_unicode=True, charset='utf8', autocommit=False)
+    for k, v in defaults.iteritems():
+        params[k] = kwargs.pop(k, v)
     params.update(kwargs)
     try:
         engine = _Engine(lambda: MySQLdb.connect(**params))
         logging.info('Init mysql engine <%s> done.' % hex(id(engine)))
     except:
-        raise InterfaceError('Init database failed.')
+        raise #InterfaceError('Init database failed.')
 
 
 class _DBContext(threading.local):
@@ -109,7 +108,7 @@ class _ConnectionCtx(object):
     def __exit__(self, exc_type, exc_value, exc_traceback):
         global _db_context
         if self.should_cleanup:
-            _db_context.cleaup()
+            _db_context.cleanup()
 
 def connection():
     """
@@ -233,11 +232,11 @@ def _update(sql, args):
     try:
         cursor = _db_context.cursor()
         cursor.excute(sql, args)
-        row_count = cursor.rowcount
+        last_row_id = int(cursor.lastrowid)
         if _db_context.transactions == 0:
             logging.debug('Auto commit.')
             _db_context.commit()
-        return row_count
+        return last_row_id
     finally:
         if cursor:
             cursor.close()
@@ -432,7 +431,7 @@ class ModelMetaClass(type):
         # check exists of primary key
         if not primary_key:
             raise ProgrammingError("Primary key not in class: '%s'" % name)
-        for k in attrs:
+        for k in mappings.iterkeys():
             attrs.pop(k)
         attrs['__table__'] = name.lower()
         attrs['__mappings__'] = mappings
@@ -488,6 +487,28 @@ class Model(dict):
         else:
             d = select_one('select * from %s' % cls.__table)
         return cls(**d) if d else None
+
+    @classmethod
+    def select_all(cls, conditions, *args):
+        """
+        Execute select SQL and return all result if match conditions.
+
+        Parameters:
+            conditions: such as `catagory=?` or None.
+            args: args for conditions, such as `coding` or nothing.
+        """
+        if conditions:
+            d = select('select * from {0} where {1}'.format(cls.__table__, \
+                    conditions), *args)
+        else:
+            d = select('select * from {}'.format(cls.__table__))
+        return cls(**d) if d else None
+
+    @classmethod
+    def select(cls, sql, *args):
+        """Execute user-defined select SQL."""
+        d = select(sql, *args)
+        return cls(d) if d else None
 
     @classmethod
     def count(cls, conditions, *args):
