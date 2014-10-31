@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-15 11:52:43 Wed
-    Last Modified: 2014-10-22 21:58:36 Wed
+    Last Modified: 2014-10-31 18:24:30 Fri
     Description:
         http module can handle request info and set response info.
         `HttpError` object is used to raise HTTP errors.
@@ -26,11 +26,9 @@ _version = 'LTok/0.1'
 
 import cookie
 
-from tools import to_str, to_unicode
+from tools import to_str, to_unicode, Dict
 
 import urlparse, re, urllib
-
-import logging
 
 # Response status
 RESPONSE_STATUS = {
@@ -218,14 +216,20 @@ class Request(object):
             data[key] = _convert(body_dict[key])
         return data
 
-    def data(self):
+    def data(self, **kwargs):
         """Get input data as dict containing values as unicode,
-        list or MultipartFile."""
+        list or MultipartFile. Parameters kwargs is default value.
+        """
         if self.request_method == 'GET':
             data = self._data_from_get()
         if self.request_method == 'POST':
             data = self._data_from_post()
-        return dict(**data)
+        if not kwargs:
+            return Dict(**data)
+        inputs = Dict()
+        for k, v in kwargs.iteritems():
+            inputs[k] = data.get(k, [v])[0]
+        return inputs
 
     def get_argument(self, key, default=None):
         """Get value by name, return default value if key not found."""
@@ -236,7 +240,7 @@ class Request(object):
 
     def get_arguments(self, key):
         """Get multiple values by key."""
-        value = self._get_raw_input()[key]
+        value = self.data().get(key)
         if isinstance(value, list):
             return value[:]
         return [value]
@@ -296,7 +300,6 @@ class Request(object):
 
     def _get_cookies(self):
         cookie_str = self._environ.get('HTTP_COOKIE', None)
-        print 'http cookie: ',cookie_str
         if not cookie_str:
             return None
         cookie_dict = cookie.get_cookie(cookie_str)
