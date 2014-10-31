@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-10-31 21:05:20 Fri
+    Last Modified: 2014-10-31 21:28:23 Fri
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
@@ -555,7 +555,7 @@ class Model(dict):
     def insert(self):
         params = {}
         for k, v in self.__mappings__.iteritems():
-            if k.insertable:
+            if v.insertable:
                 if not hasattr(self, k):
                     setattr(self, k, v.default)
                 params[v.name] = getattr(self, k)
