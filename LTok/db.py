@@ -5,12 +5,15 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-10-31 00:19:09 Fri
+    Last Modified: 2014-10-31 12:47:22 Fri
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
     Change Activity:
-        - None
+        - MySQLdb: __version__ = 1.2.5
+        - Fix the error:
+             query = query % tuple([db.literal(item) for item in args])
+             TypeError: not all arguments converted during string formatting
 --------------------------------------------------------------------------------
 """
 
@@ -36,10 +39,10 @@ engine = None
 class _Engine(object):
 
     def __init__(self, connect):
-        self._connect = connect()
+        self._connect = connect
 
     def get_connect(self):
-        return self._connect
+        return self._connect()
 
 def init_db(user, passwd, db, host='localhost', port=3306, **kwargs):
     """Create a MySQLdb engine with some parameters."""
@@ -56,7 +59,7 @@ def init_db(user, passwd, db, host='localhost', port=3306, **kwargs):
         engine = _Engine(lambda: MySQLdb.connect(**params))
         logging.info('Init mysql engine <%s> done.' % hex(id(engine)))
     except:
-        raise #InterfaceError('Init database failed.')
+        raise InterfaceError('Init database failed.')
 
 
 class _DBContext(threading.local):
@@ -189,6 +192,7 @@ def _select(sql, one, *args):
     according to one(True or False).
     """
     global _db_context
+    sql = sql.replace('?', '%s')
     logging.debug('SQL: %s, ARGS: %s' % (sql, args))
     try:
         cursor = _db_context.cursor()
@@ -228,6 +232,7 @@ def select(sql, *args):
 def _update(sql, args):
     """Such as [update users set name='Last_D']"""
     global _db_context
+    sql = sql.replace('?', '%s')
     logging.debug('SQL: %s, ARGS: %s' % (sql, args))
     try:
         cursor = _db_context.cursor()
@@ -433,7 +438,8 @@ class ModelMetaClass(type):
             raise ProgrammingError("Primary key not in class: '%s'" % name)
         for k in mappings.iterkeys():
             attrs.pop(k)
-        attrs['__table__'] = name.lower()
+        if not '__table__' in attrs:
+            attrs['__table__'] = name.lower()
         attrs['__mappings__'] = mappings
         attrs['__primary_key__'] = primary_key
         def _sql(self):
@@ -468,7 +474,7 @@ class Model(dict):
     @classmethod
     def get_by_primary_key(cls, primary_key):
         """Execute select SQL by primary key."""
-        d = select_one('select * from {0} where {1}=?'.format(cls.__table__, \
+        d = select_one('select * from %s where %s=?' % (cls.__table__, \
                 cls.__primary_key__.name), primary_key)
         return cls(**d) if d else None
 
@@ -482,7 +488,7 @@ class Model(dict):
             argss: args for conditions, such as `1` or nothing.
         """
         if conditions:
-            d = select_one('select * from {0} where {1}'.format(cls.__table__, \
+            d = select_one('select * from %s where %s' % (cls.__table__, \
                     conditions), *args)
         else:
             d = select_one('select * from %s' % cls.__table)
@@ -498,10 +504,10 @@ class Model(dict):
             args: args for conditions, such as `coding` or nothing.
         """
         if conditions:
-            d = select('select * from {0} where {1}'.format(cls.__table__, \
+            d = select('select * from %s where %s' % (cls.__table__, \
                     conditions), *args)
         else:
-            d = select('select * from {}'.format(cls.__table__))
+            d = select('select * from %s' % cls.__table__)
         return cls(**d) if d else None
 
     @classmethod
@@ -516,11 +522,12 @@ class Model(dict):
         number. Parameters `args` for conditions if exists.
         """
         if conditions:
-            num = select_int('select count({0}) from {1} where {2}'.format(\
-                cls.__primary__key__.name, cls.__table__, conditions), *args)
+            num = select_int('select count(%s) from %s where %s' % \
+                    (cls.__primary__key__.name, cls.__table__, conditions),\
+                    *args)
         else:
-            num = select_int('select count({0}) from {1}'.format(\
-                    cls.__primary_key__.name, cls.__table__))
+            num = select_int('select count(%s) from %s' % \
+                    (cls.__primary_key__.name, cls.__table__))
         return num
 
     def update(self):
@@ -540,7 +547,7 @@ class Model(dict):
     def delete(self):
         pk = self.__primary_key__.name
         args = getattr(self, pk)
-        _update('delete from {0} where {1}=?'.format(self.__table__, pk), args)
+        _update('delete from %s where %s=?' % (self.__table__, pk), args)
         return self
 
     def insert(self):
