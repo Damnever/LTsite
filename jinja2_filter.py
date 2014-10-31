@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-23 11:29:22 Thu
-    Last Modified: 2014-10-25 13:37:26 Sat
+    Last Modified: 2014-10-31 16:46:51 Fri
     Description:
         Some use-defined Jinja2 filter.
     Change Activity:
@@ -43,6 +43,8 @@ def delta_filter(t):
     dt = datetime.datetime.fromtimestamp(t)
     return u'%s年%s月%s日' % (dt.year, dt.month, dt.day)
 
+def pwd_filter(pw):
+    return '*'*8
 
 def _get_plain_text(html, l=None):
     """Get all plain text from html body."""
