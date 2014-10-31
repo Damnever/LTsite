@@ -5,15 +5,16 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-10-31 21:30:57 Fri
+    Last Modified: 2014-10-31 23:09:30 Fri
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
     Change Activity:
         - MySQLdb: __version__ = 1.2.5
         - Fix the error:
-             query = query % tuple([db.literal(item) for item in args])
-             TypeError: not all arguments converted during string formatting
+             `query = query % tuple([db.literal(item) for item in args])`
+             `TypeError: not all arguments converted during string formatting`
+        - Made a mistake, delete data without connection.
 --------------------------------------------------------------------------------
 """
 
@@ -136,7 +137,7 @@ class _TransactionCtx(object):
         self.should_close_conn = False
         if not _db_context.is_init():
             _db_context.init()
-            self.should_close_onn = True
+            self.should_close_conn = True
         _db_context.transactions += 1
         logging.debug('Begining transation ...' if _db_context.transactions==1\
                 else 'Join to current transactions ...')
@@ -229,7 +230,7 @@ def select(sql, *args):
     """Execute select SQL and return list or empty list if no result."""
     return _select(sql, False, *args)
 
-def _update(sql, args):
+def _update(sql, *args):
     """Such as [update users set name='Last_D']"""
     global _db_context
     sql = sql.replace('?', '%s')
@@ -504,10 +505,10 @@ class Model(dict):
             args: args for conditions, such as `coding` or nothing.
         """
         if conditions:
-            L = select('select * from %s where %s' % (cls.__table__, \
-                    conditions), *args)
+            L = select('select * from %s where %s order by id desc' % \
+                    (cls.__table__, conditions), *args)
         else:
-            L = select('select * from %s' % cls.__table__)
+            L = select('select * from %s order by id desc' % cls.__table__)
         return [cls(**d) for d in L] if L else None
 
     @classmethod
@@ -548,8 +549,8 @@ class Model(dict):
 
     def delete(self):
         pk = self.__primary_key__
-        args = getattr(self, pk)
-        _update('delete from %s where %s=?' % (self.__table__, pk), args)
+        args = (getattr(self, pk),)
+        delete(self.__table__, '%s=?'%pk, args)
         return self
 
     def insert(self):
