@@ -67,13 +67,11 @@ def set_cookie(name, value, max_age=(7*24*60*60), expires=None, path='/',\
 
 def get_cookie(s):
     """Load cookie from str as dict. the name and value both are str."""
-    print 'cookie cookie str: ', s
     cookies = {}
     for each in s.split(';'):
         pos = each.find('=')
         if pos > 0:
             cookies[each[:pos].strip()] = urllib.unquote(each[pos+1:])
-    print "Cookie dict:", cookies
     return cookies
 
 def del_cookie(name):
