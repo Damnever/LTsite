@@ -19,7 +19,6 @@
 - 支持 cookie 以及基于 session(Cookie形式) 的权限拦截器
 - 基于 WSGI 的微框架 LTok (lightweight is ok) 0.1 版
 - 为 Jinja2 加入一些自定义的过滤器
-- 些许前端页面
 - 使用 Markdown2 因为他可以不用安装，而且应用可能部署在 SAE 上面(穷)
 - ORM **"引用"**完成
 - MySQL 脚本
@@ -30,7 +29,7 @@
 - 文档
 - 无限滚动分页
 - AJAX(用 Json 传递登录注册时的错误信息)
-- N++ >>> Done！I'm walking with Jesus ......
+- 目测约300后端行代码测试无问题 >>> Done！I'm walking with Jesus ......
 
 ---
 
