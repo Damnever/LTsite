@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-15 13:31:52 Wed
-    Last Modified: 2014-10-29 16:52:15 Wed
+    Last Modified: 2014-10-31 17:24:37 Fri
     Description:
         A simple WSGI web framework. To re-invent the wheel, just for the
         purpose, better and easier to understand and use others' framework.
@@ -66,21 +66,19 @@ _G_secret = None
 _G_cookie_name = None
 
 
-def _make_single_cookie(u_id, max_age):
+def make_single_cookie(u_id, max_age):
     """make a single cookie value, use hmac."""
     expires = str(int(time.time()) + max_age)
     L = [u_id, expires, hmac.new(_G_secret, 'LTok%s-%s' % \
             (u_id, expires)).hexdigest()]
-    print 'Set L:', L
     return '-'.join(L)
 
-def _parse_single_cookie(cookie_str):
+def parse_single_cookie(cookie_str):
     """parse single cookie, which is made."""
     try:
         L = cookie_str.split('-')
         if len(L) != 3:
             return None
-        print 'GET L: ', L
         u_id, expires, hmac_str = L
         if int(expires) < time.time():
             return None
@@ -133,15 +131,14 @@ class Page(object):
     def get_current_user(self):
         """Get session(cookie)"""
         cookie_value = self.get_cookie(_G_cookie_name)
-        print 'GET cookie', cookie_value
         if cookie_value is None:
             return None
-        u_id = _parse_single_cookie(cookie_value)
+        u_id = parse_single_cookie(cookie_value)
         return u_id
 
     def set_current_user(self, u_id, max_age=86400):
         """In fact, this operation will set a session cookie."""
-        cookie_value = _make_single_cookie(u_id, max_age)
+        cookie_value = make_single_cookie(u_id, max_age)
         self.set_cookie(_G_cookie_name, cookie_value)
 
     def redirect(self, url):
@@ -335,9 +332,6 @@ class App(object):
         else:
             _G_cookie_name = '_xsrf_'
 
-        # set logging level
-        self.set_log_level()
-
     def set_template_engine(self, cls, template_dir, **kw):
         """
         Set a template Engine. The App's constructor will initialize the default
@@ -362,21 +356,9 @@ class App(object):
         """Get prefix of static file diretory."""
         return '/' + os.path.split(self._static_path)[1]
 
-    def set_log_level(self, level=logging.INFO):
-        """
-        Set log level to show logging information, default to 20.
-        Your choices:
-        10(logging.DEBUG), 30(logging.WARNING), 40(logging.CRITICAL).
-        """
-        if level not in [10, 20, 30, 40]:
-            logging.warning('-- The `level` parameter should be \
-                10(logging.DEBUG) 20(logging.INFO) 30(logging.WARNING) \
-                40(logging.CRITICAL)')
-            return
-        logging.basicConfig(level=logging.INFO)
-
     def run(self, port=9999, host='localhost'):
         """Run a local server, which will work in local area network."""
+
         if not isinstance(host, str):
             logging.warning('-- The `host` parameter should be str object.')
             return
