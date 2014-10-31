@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-10-31 12:47:22 Fri
+    Last Modified: 2014-10-31 19:41:20 Fri
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
@@ -475,7 +475,7 @@ class Model(dict):
     def get_by_primary_key(cls, primary_key):
         """Execute select SQL by primary key."""
         d = select_one('select * from %s where %s=?' % (cls.__table__, \
-                cls.__primary_key__.name), primary_key)
+                cls.__primary_key__), primary_key)
         return cls(**d) if d else None
 
     @classmethod
@@ -514,7 +514,7 @@ class Model(dict):
     def select(cls, sql, *args):
         """Execute user-defined select SQL."""
         d = select(sql, *args)
-        return cls(d) if d else None
+        return cls(**d) if d else None
 
     @classmethod
     def count(cls, conditions, *args):
@@ -523,11 +523,11 @@ class Model(dict):
         """
         if conditions:
             num = select_int('select count(%s) from %s where %s' % \
-                    (cls.__primary__key__.name, cls.__table__, conditions),\
+                    (cls.__primary__key__, cls.__table__, conditions),\
                     *args)
         else:
             num = select_int('select count(%s) from %s' % \
-                    (cls.__primary_key__.name, cls.__table__))
+                    (cls.__primary_key__, cls.__table__))
         return num
 
     def update(self):
@@ -540,12 +540,12 @@ class Model(dict):
                     arg = v.default
                     setattr(self, k, arg)
                 kw[k] = arg
-        pk = self.__primary_key__.name
+        pk = self.__primary_key__
         update_kw(self.__table__, '%s=?'%pk, getattr(self, pk), **kw)
         return self
 
     def delete(self):
-        pk = self.__primary_key__.name
+        pk = self.__primary_key__
         args = getattr(self, pk)
         _update('delete from %s where %s=?' % (self.__table__, pk), args)
         return self
