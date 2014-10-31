@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-10-31 19:41:20 Fri
+    Last Modified: 2014-10-31 21:05:20 Fri
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
@@ -504,16 +504,18 @@ class Model(dict):
             args: args for conditions, such as `coding` or nothing.
         """
         if conditions:
-            d = select('select * from %s where %s' % (cls.__table__, \
+            L = select('select * from %s where %s' % (cls.__table__, \
                     conditions), *args)
         else:
-            d = select('select * from %s' % cls.__table__)
-        return cls(**d) if d else None
+            L = select('select * from %s' % cls.__table__)
+        return [cls(**d) for d in L] if L else None
 
     @classmethod
     def select(cls, sql, *args):
         """Execute user-defined select SQL."""
-        d = select(sql, *args)
+        L = select(sql, *args)
+        if isinstance(L, list):
+            return [cls(**d) for d in L]
         return cls(**d) if d else None
 
     @classmethod
