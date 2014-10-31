@@ -1,0 +1,139 @@
+*{
+	/* Resetting the default styles of the page */
+	margin:0;
+	padding:0;
+}
+
+#inputForm{
+	/* The main form container */
+	background-color:#1C1C1C;
+	border:1px solid #080808;
+	margin:4% auto 10%;
+	padding:20px;
+	width:500px;
+	
+	-moz-box-shadow:0 0 1px #444 inset;
+	-webkit-box-shadow:0 0 1px #444 inset;
+	box-shadow:0 0 1px #444 inset;
+}
+
+#inputForm h1{
+	/* The form heading */
+	font-size:2em;
+	font-weight:normal;
+	padding:0 0 10px 10px;
+	text-align:left;
+}
+
+.fieldContainer{
+	/* The light rounded section, which contans the fields */
+	background-color:#1E1E1E;
+	border:1px solid #0E0E0E;
+	padding:20px 15px;
+	
+	/* CSS3 box shadow, used as an inner glow */
+	-moz-box-shadow:0 0 20px #292929 inset;
+	-webkit-box-shadow:0 0 20px #292929 inset;
+	box-shadow:0 0 20px #292929 inset;
+}
+
+#inputForm,.fieldContainer,.errorTip{
+	/* Rounding the divs at once */
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	border-radius:12px;
+}
+
+
+.formRow{
+	height:50px;
+	padding:10px;
+	position:relative;
+}
+
+.label{
+	float:left;
+	padding:0 20px 0 10px;
+	text-align:right;
+	width:100px;
+}
+
+label{
+	font-size:1em;
+    font-weight: bold;
+	letter-spacing:1px;
+	line-height:30px;
+}
+
+.field{
+	float:left;
+}
+
+.field input{
+	border:1px solid white;
+    width: 240px;
+	font-size:1em;
+	padding:4px 5px;
+	background:url("../images/box_bg.png") repeat-x scroll left top #FFFFFF;
+	outline:none; 
+}
+
+input:hover,
+input:focus{
+	-moz-box-shadow:0 0 8px lightblue;
+	-webkit-box-shadow:0 0 8px lightblue;
+	box-shadow:0 0 8px lightblue;
+}
+
+.errorTip{
+	/* The error divs */
+	background-color:#970F08;
+	color:white;
+	font-size:10px;
+	height:26px;
+	letter-spacing:0.4px;
+	margin-left:20px;
+	padding:5px 0 5px 10px;
+	position:absolute;
+	text-shadow:1px 1px 0 #555555;
+	width:200px;
+	right:-130px;
+}
+
+.buttonRow {
+    padding:20px 0 8px 80px;
+}
+
+.buttonRow button {
+    border:1px solid #0E0E0E;
+	cursor:pointer;     
+    color:#00CD66;
+    background:#1E1E1E;
+	height:32px;
+    padding: 3px;
+    font-size:1.1em;
+	width:80px;
+    -moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+    -moz-box-shadow:0 0 20px #292929 inset;
+	-webkit-box-shadow:0 0 20px #292929 inset;
+	box-shadow:0 0 20px #292929 inset;
+}
+
+.buttonRow button:hover {
+    -moz-box-shadow:0 0 8px lightblue;
+	-webkit-box-shadow:0 0 8px lightblue;
+	box-shadow:0 0 8px lightblue;
+}
+
+#inputForm a, #inputForm a:visited {
+	color:#0196e3;
+    margin-left: 20px;
+	text-decoration:none;
+	outline:none;
+}
+
+#inputForm a:hover{
+	text-decoration:underline;
+}

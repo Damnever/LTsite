@@ -1,6 +1,22 @@
+@font-face {
+    font-family: 'xk';
+	src: url("./fonts/xk.eot");/*IE*/
+    src: url("./fonts/xk.woff") format('woff')
+         url('./fonts/xk.ttf') format('truetype');
+}
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 .clearfix:before, .clearfix:after { content: ''; display: table; }
 .clearfix:after { clear: both; }
+
+
+.nocontent {
+    text-align: center;
+	margin: 200px auto 0;
+	font-family: "xk", Courier;
+	font-size: 200px; text-transform: uppercase;
+	color: #fff;
+	text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+}
 
 li a {
     color: #CDBE70;
@@ -15,7 +31,7 @@ li a {
 
 li a:hover,  a:focus {
 	color: #828282;
-    background: #444;
+    background: #363636;
     opacity: 1;
 }
 
@@ -23,10 +39,9 @@ li a:hover,  a:focus {
 /**********************Effect**********************/
 
 .grid-wrap {
-	clear: both;
 	margin: 0 auto;
+    max-width: 92%;
 	padding: 0;
-	max-width: 1260px;
 }
 
 .grid {
@@ -36,50 +51,12 @@ li a:hover,  a:focus {
 	min-height: 500px;
 }
 
-.js .grid {
-	background: url(../static/images/loading.gif) no-repeat 50% 100px;
-}
-
-.js .grid.loaded {
-	background: none;
-}
-
 .grid li {
 	display: inline-block;
 	overflow: hidden;
 	width: 314px;
 	text-align: left;
 	vertical-align: top;
-}
-
-.js .grid li {
-	display: none;
-	float: left;
-}
-
-.js .grid.loaded li {
-	display: block;
-}
-
-/* Title box */
-.title-box h2 {
-	display: block;
-	margin: 7px;
-	padding: 20px;
-	background: #2E3444;
-	color: #D3EEE2;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	font-weight: 300;
-}
-
-.title-box h2 a {
-	display: block;
-	font-weight: 900;
-}
-
-.title-box h2 a:hover {
-	color: #D3EEE2;
 }
 
 /* Anchor and summary */
@@ -113,12 +90,6 @@ li a:hover,  a:focus {
 	background: #96cdc8;
 }
 
-.grid.swipe-down .curtain {
-	-webkit-transform: translate3d(0,-100%,0);
-	transform: translate3d(0,-100%,0);
-}
-
-
 /* Shadow */
 .grid .curtain::after {
 	position: absolute;
@@ -128,10 +99,6 @@ li a:hover,  a:focus {
 	height: 100%;
 	background: rgba(0,0,0,1);
 	content: '';
-}
-
-.grid.swipe-down .curtain::after {
-	top: -100%;
 }
 
 /* Title */
@@ -168,60 +135,13 @@ li a:hover,  a:focus {
 }
 
 /* Hover effects */
-.grid li.shown:hover h3 {
+.grid li:hover h3 {
 	color: #fff;
 	-webkit-transform: translate3d(0,-30px,0);
 	transform: translate3d(0,-30px,0);
 }
 
-.grid li.shown:hover > a::before {
+.grid li:hover > a::before {
 	border-width: 14px;
 	border-color: #2E3444;
-}
-
-/* Animations */
-
-/* Swipe down */
-.grid.swipe-down li.animate .curtain {
-	-webkit-animation: swipeDown 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
-	animation: swipeDown 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
-}
-
-@-webkit-keyframes swipeDown {
-	0% {} /* fixes Chrome 35.0.1916.114 issue (easing breaks) */
-	50%, 60% { -webkit-transform: translate3d(0,0,0); }
-	100% { -webkit-transform: translate3d(0,100%,0); }
-}
-
-@keyframes swipeDown {
-	0% {}
-	50%, 60% { -webkit-transform: translate(0); transform: translate(0); }
-	100% { transform: translate3d(0,100%,0); transform: translate3d(0,100%,0); }
-}
-
-/* Hide image and title and show at half time */
-.js .grid li #summary,
-.js .grid li h3 {
-	visibility: hidden;
-}
-
-.grid li.animate #summary,
-.grid li.animate h3 {
-	-webkit-animation: showMe 1.5s step-end forwards;
-	animation: showMe 1.5s step-end forwards;
-}
-
-@-webkit-keyframes showMe {
-	from { visibility: hidden; }
-	60%, 100% { visibility: visible; }
-}
-
-@keyframes showMe {
-	from { visibility: hidden; }
-	60%, 100% { visibility: visible; }
-}
-
-.grid li.shown #summary,
-.grid li.shown h3 {
-	visibility: visible;
 }
