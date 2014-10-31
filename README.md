@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
 ---
 
-##索命翔王--前端（整个进度都变缓了）
+##索命翔王--前端
 ![](./static/login.png)
 登录
 ![](./static/signin.png)
