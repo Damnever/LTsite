@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-10-31 21:28:23 Fri
+    Last Modified: 2014-10-31 21:30:57 Fri
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
@@ -236,7 +236,7 @@ def _update(sql, args):
     logging.debug('SQL: %s, ARGS: %s' % (sql, args))
     try:
         cursor = _db_context.cursor()
-        cursor.excute(sql, args)
+        cursor.execute(sql, args)
         last_row_id = int(cursor.lastrowid)
         if _db_context.transactions == 0:
             logging.debug('Auto commit.')
