@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-15 11:52:43 Wed
-    Last Modified: 2014-10-31 18:24:30 Fri
+    Last Modified: 2014-10-31 20:23:21 Fri
     Description:
         http module can handle request info and set response info.
         `HttpError` object is used to raise HTTP errors.
@@ -22,7 +22,7 @@
 --------------------------------------------------------------------------------
 """
 
-_version = 'LTok/0.1'
+_version = 'LTok/0.2'
 
 import cookie
 
