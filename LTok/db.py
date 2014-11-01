@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-10-31 23:09:30 Fri
+    Last Modified: 2014-11-01 16:16:55 Sat
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
@@ -55,6 +55,7 @@ def init_db(user, passwd, db, host='localhost', port=3306, **kwargs):
     defaults = dict(use_unicode=True, charset='utf8', autocommit=False)
     for k, v in defaults.iteritems():
         params[k] = kwargs.pop(k, v)
+    print params
     params.update(kwargs)
     try:
         engine = _Engine(lambda: MySQLdb.connect(**params))
@@ -252,8 +253,8 @@ def insert(table, **kwargs):
     """Execute insert SQL."""
     cols, args = zip(*kwargs.iteritems())
     sql = 'insert into %s (%s) values(%s)' % (table, ','.join(cols), \
-            ','.join('?' for i in range(len(args))))
-    return _update(sql, args)
+            ','.join(['?' for i in range(len(cols))]))
+    return _update(sql, *args)
 
 @with_connection
 def update(sql, *args):
