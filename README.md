@@ -15,25 +15,49 @@
 
 ---
 
-> **已完成**：
+> **更新列表**：
 - 支持 cookie 以及基于 session(Cookie形式) 的权限拦截器
 - 基于 WSGI 的微框架 LTok (lightweight is ok) 0.1 版
 - 为 Jinja2 加入一些自定义的过滤器
 - 使用 Markdown2 因为他可以不用安装，而且应用可能部署在 SAE 上面(穷)
 - ORM **"引用"**完成
 - MySQL 脚本
-- 大多前端页面
-- 部分后端逻辑
-
-> **待完成**：
-- 文档
-- 无限滚动分页
-- AJAX(用 Json 传递登录注册时的错误信息)
-- 目测约300后端行代码测试无问题 >>> Done！I'm walking with Jesus ......
+- 全部前端页面
+- 大部分后端代码
+- 网站运行正常，小框架还不错，给你升级到 0.2 版，目测会成为终极版本
+- 无限滚动分页【xxx】
+- AJAX(用 Json 传递登录注册时的错误信息)【xxx】
+- 想起还要为 markdown 语法高亮装第三方库，暂时搁置 ...
 
 ---
 
-##几行代码：
+---
+##不扯淡行吗？
+####**眼见为实** [http://d2ak.sinaapp.com/](http://d2ak.sinaapp.com/)
+####本地使用
+1. clone 到本地
+```
+ git clone git@github.com:Damnever/LTsite.git
+```
+1. **Python2.7+ 还用说？**
+1. 解决依赖问题
+```
+pip install jinja2
+pip install MySQLdb-Python
+```
+1. 初始化数据库
+```
+mysql -u root -p < site.sql
+```
+1. 运行网站
+```
+python run_server.py
+```
+
+
+##几行代码
+> **源码简直不忍直视 ... **
+
 ```
 from LTok.web import Page, App
 import os
@@ -57,18 +81,6 @@ if __name__ == '__main__':
 
 ---
 
-##索命翔王--前端
-![](./static/login.png)
-登录
-![](./static/signin.png)
-注册
-![](./static/desired2.png)
-主页
-![](./static/desired.png)
-文章
-![](./static/about.png)
-关于
-![](./static/admin.png)
-后台
-![](./static/edit.png)
-编辑
+***
+
+2014.11 长沙
