@@ -1,0 +1,58 @@
+{% extends '_admin.html' %}
+
+{% block title %}
+	<title>D2AK-编辑文章</title>
+{% endblock title %}
+
+{% block content %}
+    <fieldset>
+        <legend>敲的不是键盘，是艺术！</legend>
+        <form action="/admin/edit" 
+        {% if created_at %} action="/admin/edit/{{ created_at }}" 
+        {% else %} action="/admin/edit" {% endif %}    
+        method="POST">
+            <input class="title" type="text" name="title" placeholder="The Zen of Python"
+            {% if title %} value="{{ title }}" {% endif %}/>
+            <!--hidden input-->
+            {% if tag %}<input type="hidden" name="old_tag" value="{{ tag }}"/>{% endif %}
+            {% if created_at %}<input type="hidden" name="created_at" value="{{ created_at }}"/>{% endif %}
+            <input type="text" name="tag" class="tag" placeholder="标签" 
+            {% if tag %} value="{{ tag }}" {% endif %}/>
+            <span id="sleHid"><span id="sleBG">
+            <select name="category" class="select">
+                <option value="coding">编程</option>
+                <option value="wiki">仓库</option>
+                <option value="bushit">扯淡</option>
+            </select>
+            </span></span>
+            <button type="submit" class="button green big">< 发 布 ></button>
+            <div contenteditable="true">
+                <textarea class="content" name="raw_content">
+{% if article %}
+{{ article.raw_content }}
+{% else %}
+ - Beautiful is better than ugly.
+ - Explicit is better than implicit.
+ - Simple is better than complex.
+ - Complex is better than complicated.
+ - Flat is better than nested.
+ - Sparse is better than dense.
+ - Readability counts.
+ - Special cases aren't special enough to break the rules.
+ - Although practicality beats purity.
+ - Errors should never pass silently.
+ - Unless explicitly silenced.
+ - In the face of ambiguity, refuse the temptation to guess.
+ - There should be one-- and preferably only one --obvious way to do it.
+ - Although that way may not be obvious at first unless you're Dutch.
+ - Now is better than never.
+ - Although never is often better than *right* now.
+ - If the implementation is hard to explain, it's a bad idea.
+ - If the implementation is easy to explain, it may be a good idea.
+ - Namespaces are one honking great idea -- let's do more of those!"
+{% endif %}
+                </textarea>
+            </div>
+        </form>
+    </fieldset>
+{% endblock content %}

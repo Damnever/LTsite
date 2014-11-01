@@ -1,36 +1,41 @@
 {% extends 'base.html' %}
 
 {% block head_link %}
-		<link rel="stylesheet" type="text/css" href="../static/css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="../static/css/list.css" />
-		<script src="../static/js/toc_js/modernizr.custom.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/css/tag.css" />
 {% endblock head_link %}
 
 {% block content %}
 <div class="list">
-	<section class="grid-wrap">
-		<ul class="grid swipe-down" id="grid">
+<div class="tagcloud">
+        <div id="tag_holder">
+			<a href="/index/" class="tag">首页</a>
+		    <a href="/coding/" class="tag">编程</a>
+			<a href="/wiki/" class="tag">仓库</a>
+		    <a href="/bushit/" class="tag">扯淡</a>
+            <a href="/about/" class="tag">关于</a>
+            {% if tags %}
+            {% for tag in tags %}
+		    <a href="/{{ tag }}/" class="tag">{{ tag }}</a>
+            {% endfor %}
+            {% endif%}
+        </div>
+    </div>
+    <span class="clearfix"></span>
+    <span class="split"></span>
+	<div class="grid-wrap">
+		<ul class="grid">
+            {% if articles %}
             {% for article in articles %}
-                <li><a href="/{{ article.main_tag }}/{{ article.created_at }}">
+                <li><a href="/{{ article.category }}/{{ article.created_at }}">
                     <div id="summary">{{ article.content|summary_filter }}</div>
                     <h3>{{ article.title }}</h3>
                 </a></li>
             {% endfor %}
+            {% else %}
+                <div class="nocontent">Nothing</div>
+            {% endif %}
 		</ul>
-	</section>
+	</div>
 </div>
 {% endblock content %}
-
-{% block foot_script %}
-	<script src="../static/js/toc_js/masonry.pkgd.min.js"></script>
-	<script src="../static/js/toc_js/imagesloaded.pkgd.min.js"></script>
-	<script src="../static/js/toc_js/classie.js"></script>
-	<script src="../static/js/toc_js/colorfinder-1.1.js"></script>
-	<script src="../static/js/toc_js/gridScrollFx.js"></script>
-	<script>
-	new GridScrollFx( document.getElementById( 'grid' ), {
-		viewportFactor : 0.4
-	});
-	</script>
-	<script src="../js/jquery-2.1.1.min.js"></script>
-{% endblock foot_script %}

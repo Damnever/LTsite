@@ -1,0 +1,36 @@
+{% extends '_admin.html' %}
+
+{% block title %}
+	<title>D2AK-所有用户</title>
+{% endblock title %}
+
+{% block content %}
+<table class="zebra">
+	<thead>
+        <tr>
+			<th>用 户 名</th>
+            <th>密 码</th>
+			<th>邮 箱</th>
+            <th>等 级</th>
+			<th>操 作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if users %}
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.password|pwd_filter }}</td>
+            <td>{{ user.email }}</td>
+            {% if user.admin %}<td>管理员</td>{% else %}<td>渣渣</td>{% endif %}
+            <td>
+                <button class="button orange medium">
+                    <a href="/admin/delete/user/{{ user.id }}">删除</a>
+                </button>
+            </td>
+       </tr>
+       {% endfor %}
+       {% endif %}
+    </tbody>
+</table>
+{% endblock content %}

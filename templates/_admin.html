@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<!--
+    Author: Last_D
+    E-mail: dxc_wolf@163.com
+    The visual effections from some one's Demo.
+-->
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block title %}
+	<title>D2AK-所有文章</title>
+    {% endblock title %}
+	<link rel="stylesheet" href="../static/css/admin.css" type="text/css"/>
+    <script src="../static/js/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+
+<div id="container">
+
+    <nav>
+        <ul>
+            <li><a href="/">D2AK</a></li>
+            <li><a href="/admin/articles" rel="/admin/articles">文章</a></li>
+            <li><a href="/admin/comments" rel="/admin/comments">评论</a></li>
+            <li><a href="/admin/users" rel="/admin/users">用户</a></li>
+        </ul>
+    </nav>
+
+    <div class="split"></div>
+
+    {% block content %}
+    <button class="button green big"><a href="/admin/edit/"> + 添加新文章</a></button>
+
+	<table class="zebra">
+		<thead>
+        	<tr>
+				<th>标 题</th>
+				<th>作 者</th>
+                <th>类 别</th>
+				<th>时 间</th>
+				<th>操 作</th>
+            </tr>
+		</thead>
+        <tbody>
+            {% if articles %}
+            {% for article in articles %}
+            <tr>
+                <td><a class="a" href="/{{ article.category }}/{{ article.created_at }}"  target="_blank">{{ article.title }}</a></td>
+                <td>{{ article.author }}</td>
+                <td>{{ article.category }}</td>
+                <td>{{ article.created_at|datetime_filter }}</td>
+                <td>
+                    <button class="button green medium">
+                        <a href="/admin/edit/{{ article.created_at }}">编辑</a>
+                    </button>
+                    <button class="button orange medium">
+                        <a href="/admin/delete/article/{{ article.created_at }}">删除</a>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+	</table>
+    {% endblock content %}
+    <footer id="footer">
+        Powered by <a href="/about/" target="blank">Last_D</a>. All right reserved.
+        <div class="bottom-line"></div>
+    </footer>
+    <script>
+    $(document).ready(function(){
+        var urlstr = location.href;
+        $("nav a").each(function () {
+        if ((urlstr).indexOf($(this).attr('rel')) > -1 && $(this).attr('rel') != '') {
+            $(this).attr(
+                {"id": "active"}
+            );
+        } else {
+            $(this).attr(
+                {"id": ""}
+            );
+        }
+        });
+    });
+    </script>
+</div>
+</body>
+</html>

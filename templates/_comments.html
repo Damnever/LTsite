@@ -1,0 +1,36 @@
+{% extends '_admin.html' %}
+
+{% block title %}
+	<title>D2AK-所有评论</title>
+{% endblock title %}
+
+{% block content %}
+<table class="zebra">
+	<thead>
+        <tr>
+			<th>文 章</th>
+			<th>用 户</th>
+            <th>内 容</th>
+			<th>时 间</th>
+			<th>操 作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if comments %}
+        {% for comment in comments %}
+        <tr>
+            <td>{{ comment.article_id }}</td>
+            <td>{{ comment.username }}</td>
+            <td>{{ comment.content }}</td>
+            <td>{{ comment.created_at|datetime_filter }}</td>
+            <td>
+                <button class="button orange medium">
+                    <a href="/admin/delete/comment/{{ comment.id }}">删除</a>
+                </button>
+            </td>
+       </tr>
+       {% endfor %}
+       {% endif %}
+    </tbody>
+</table>
+{% endblock content %}

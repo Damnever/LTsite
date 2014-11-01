@@ -1,0 +1,51 @@
+{% extends '_admin.html' %}
+
+{% block title %}
+	<title>D2AK-垃圾</title>
+{% endblock title %}
+
+{% block content %}
+<table class="zebra">
+    
+    <tbody>
+        {% if user %}
+        <tr>此用户已被删除</tr>
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.password|pwd_filter }}</td>
+            <td>{{ user.email }}</td>
+       </tr>
+       {% endif %}
+       {% if article %}
+       <tr>此文章已被删除</tr>
+       <tr>
+            <td>{{ article.title }}</td>
+            <td>{{ article.author }}</td>
+            <td>{{ article.category }}</td>
+            <td>{{ article.created_at|datetime_filter }}</td>  
+       </tr> 
+       {% endif %}
+       {% if comment %}
+       <tr>此评论已被删除</tr>
+       <tr>
+            <td>{{ comment.article_id }}</td>
+            <td>{{ comment.username }}</td>
+            <td>{{ comment.content }}</td>
+            <td>{{ comment.created_at|datetime_filter }}</td>
+       </tr>
+       {% endif %}
+
+       {% if comments %}
+       <tr>以及相关评论已被删除</tr>
+       {% for comment in comments %}
+       <tr>
+            <td>{{ comment.article_id }}</td>
+            <td>{{ comment.username }}</td>
+            <td>{{ comment.content }}</td>
+            <td>{{ comment.created_at|datetime_filter }}</td>
+       </tr>
+       {% endfor %}
+       {% endif %}
+    </tbody>
+</table>
+{% endblock content %}

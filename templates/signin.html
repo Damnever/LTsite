@@ -1,0 +1,59 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+<title>注册</title>
+{% endblock title %}
+
+{% block head_link %}
+<link href="../static/css/login.css" rel="stylesheet" />
+{% endblock head_link %}
+
+{% block content %}
+  <div id="inputForm">
+    <h1>你终于来了</h1>
+    <form action="/signin" method="POST">
+    <div class="fieldContainer">
+      <div class="formRow">
+        <div class="label">
+          <label for="username">用户名:</label>
+        </div>
+        <div class="field">
+          <input type="text" name="username" id="username" placeholder="用户名（3~6个字符）"/>
+        </div>
+      </div>
+      <div class="formRow">
+        <div class="label">
+          <label for="password">密 码:</label>
+        </div>
+        <div class="field">
+          <input type="password" name="password" id="password" placeholder="密码（6~10个字符）"/>
+        </div>
+      </div>
+      <div class="formRow">
+        <div class="label">
+          <label for="repassword">确 认:</label>
+        </div>
+        <div class="field">
+          <input type="password" name="repassword" id="repassword" placeholder="再次输入密码"/>
+        </div>
+      </div>
+      <div class="formRow">
+        <div class="label">
+          <label for="email">邮 箱:</label>
+        </div>
+        <div class="field">
+          <input type"email" name="email" id="email" placeholder="放心，我没事不会轰炸你的啦"/>
+        </div>
+      </div>
+    </div>
+    <!-- Closing fieldContainer -->
+    <div class="buttonRow">
+      <button type="submit" id="submit">注 册</button>
+      <a href="/login">已有账号？立即登录</a>
+    </div>
+    </form>
+  </div>
+{% endblock content %}
+
+{% block foot_script %}
+{% endblock foot_script %}

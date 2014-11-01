@@ -1,12 +1,22 @@
+<!-- 
+    Author: Last_D 
+    E-mail: dxc_wolf@163.com
+    The visual effections from some one's Demo.
+-->
+
 {% extends 'base.html' %}
 
 {% block title %}
 <title>{{ title }}</title>
 {% endblock title %}
 
+{% block head_link %}
+<link rel="stylesheet" type="text/css" href="../static/css/comment.css"/>
+{% endblock head_link %}
+
 {% block content %}
 <div class="main">
-    <h1><a>{{ article.title }}</a>a></h1>h1>
+    <h1><a>{{ article.title }}</a></h1>
     <div class="info">
         <div class="date">
             <span class="raw">发布于:</span> {{ article.created_at|datetime_filter }}
@@ -16,8 +26,39 @@
         </div>
     </div>
     <div class="content">
-        {{ article.content }}
+        {% autoescape false %}{{ article.content }}{% endautoescape %}
     </div>
     <div class="footnote">EOF</div>
 </div>
+
+<div id="footer_comment">
+        <button id="go_comment">评论</button>
+        <button id="go_login"><a href="/login">登录</a></button>
+        <button id="go_signin"><a href="/signin">注册</a></button>
+        <fieldset id="comment" style="display: none;">
+                <form action="" method="POST">
+                    <textarea rows="3" name="comment">#有我更精彩#</textarea>
+                    <button type="submit">发表</button>
+                </form>
+                <span class="clearfix"></span>
+                {% if comments %}
+                {% for comment in comments %}
+                <div class="comment"> 
+                    <div class="head_line"><strong>{{ comment.username }}</strong><span class="raw"> 发布于 </span>{{ comment.created_at|delta_filter }}</div>
+                    <div class="comment_content">{{ comment.content }}</div>
+                </div>
+                {% endfor %}
+                {% endif %}
+        </fieldset>
+    </div>
 {% endblock content %}
+{% block foot_script %}
+    <script>
+        $(document).ready(function() {
+                $("#go_comment").click(function() {
+                    $("#comment").fadeToggle("slow");
+                });
+            });
+    </script>
+{% endblock foot_script %}
+

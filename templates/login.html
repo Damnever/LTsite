@@ -1,0 +1,50 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}
+<title>登录</title>
+{% endblock title %}
+
+{% block head_link %}
+<link href="../static/css/login.css" rel="stylesheet" />
+{% endblock head_link %}
+
+{% block content %}
+  <div id="inputForm">
+    <h1>等你好久了</h1>
+    <form action="/login" method="POST">
+    <div class="fieldContainer">
+      <div class="formRow">
+        <div class="label">
+          <label for="username">用户名:</label>
+        </div>
+        <div class="field">
+          <input type="text" name="username" id="username" placeholder="xxxxxx"/>
+        </div>
+      </div>
+      <div class="formRow">
+        <div class="label">
+          <label for="password">密 码:</label>
+        </div>
+        <div class="field">
+          <input type="password" name="password" id="password" placeholder="*******"/>
+        </div>
+      </div>
+      <div class="formRow">
+        <div class="label"> 
+            <label>&nbsp;</label>
+        </div>
+        <input type="checkbox" name="rememberme" value="true"/> 一周内记住我
+    </div>
+    </div>
+    
+    <!-- Closing fieldContainer -->
+    <div class="buttonRow">
+      <button type="submit">登 录</button>
+      <a href="/signin">还没有账号，立即注册</a>  
+    </div>
+    </form>
+  </div>
+{% endblock content %}
+
+{% block foot_script %}
+{% endblock foot_script %}
