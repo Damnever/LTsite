@@ -40,16 +40,16 @@
  git clone git@github.com:Damnever/LTsite.git
 ```
 1. **Python2.7+ 还用说？**
-1. 解决依赖问题
+2. 解决依赖问题
 ```
 pip install jinja2
 pip install MySQLdb-Python
 ```
-1. 初始化数据库
+3. 初始化数据库
 ```
 mysql -u root -p < site.sql
 ```
-1. 运行网站
+4. 运行网站
 ```
 python run_server.py
 ```
