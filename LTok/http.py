@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-15 11:52:43 Wed
-    Last Modified: 2014-10-31 20:23:21 Fri
+    Last Modified: 2014-11-01 16:41:25 Sat
     Description:
         http module can handle request info and set response info.
         `HttpError` object is used to raise HTTP errors.
@@ -19,6 +19,7 @@
         - Add HttpError and RedirectError.
         - Fix error: Forget to pass a `size` parameter to `read` method of
         file-like object, `environ['wsgi.input']`.
+        - Remove `_convert()`, solve error when save Chinese to MySQL.
 --------------------------------------------------------------------------------
 """
 
@@ -175,22 +176,6 @@ class RedirectError(HttpError):
         return "RedirectError: '%s --> %s'." % (self.status, self.location)
 
 
-def _convert(item):
-    """Convert form data to unicode."""
-    if isinstance(item, list):
-        return [to_unicode(i) for i in item]
-    if item.filename:
-        return MultipartFile(item)
-    return to_unicode(item)
-
-
-class MultipartFile(object):
-    """Multipart file storage get from request input."""
-    def __init__(self, storage):
-        self.filename = to_unicode(storage.filename)
-        self.file = storage.file
-
-
 class Request(object):
     """Request object for obtaining all http request information."""
     def __init__(self, environ):
@@ -205,7 +190,7 @@ class Request(object):
         body_dict = urlparse.parse_qs(request_body)
         data = dict()
         for key in body_dict:
-            data[key] = _convert(body_dict[key])
+            data[key] = body_dict[key]
         return data
 
     def _data_from_get(self):
@@ -213,7 +198,7 @@ class Request(object):
         body_dict = urlparse.parse_qs(self._environ['QUERY_STRING'])
         data = dict()
         for key in body_dict:
-            data[key] = _convert(body_dict[key])
+            data[key] = body_dict[key]
         return data
 
     def data(self, **kwargs):
@@ -317,7 +302,7 @@ class Request(object):
     def url_params(self):
         """Get params(list), which is searched group from url regex."""
         if hasattr(self, '_url_params'):
-            return self._url_params
+            return self._url_params[0]
         return None
 
     @url_params.setter
