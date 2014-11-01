@@ -53,6 +53,7 @@ mysql -u root -p < site.sql
 ```
 python run_server.py
 ```
+- 有朝一日 ... 还是挂在 VPN 上好了
 
 
 ##几行代码
