@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-15 13:31:52 Wed
-    Last Modified: 2014-10-31 17:24:37 Fri
+    Last Modified: 2014-11-01 15:09:41 Sat
     Description:
         A simple WSGI web framework. To re-invent the wheel, just for the
         purpose, better and easier to understand and use others' framework.
@@ -242,6 +242,8 @@ class Jinja2TemplateEngine(Template):
         from jinja2 import Environment, FileSystemLoader
         if not 'autoescape' in kw:
             kw['autoescape'] = True
+        if not 'extensions' in kw:
+            kw['extensions'] = ['jinja2.ext.autoescape']
         self._env = Environment(loader=FileSystemLoader(template_dir), **kw)
 
     def add_filter(self, name, func):
