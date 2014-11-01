@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-15 13:31:52 Wed
-    Last Modified: 2014-11-01 15:09:41 Sat
+    Last Modified: 2014-11-01 18:02:25 Sat
     Description:
         A simple WSGI web framework. To re-invent the wheel, just for the
         purpose, better and easier to understand and use others' framework.
@@ -204,7 +204,7 @@ class Method(object):
         for k, v in self._urls.iteritems():
             if 'GET' in v.request_method:
                 # compile regular expression
-                re_k = re.compile('^' + k + '$')
+                re_k = re.compile(k)
                 dget[re_k] = v
         return dget
 
@@ -212,7 +212,7 @@ class Method(object):
         dpost = dict()
         for k, v in self._urls.iteritems():
             if 'POST' in v.request_method:
-                re_k = re.compile('^' + k + '$')
+                re_k = re.compile(k)
                 dpost[re_k] = v
         return dpost
 
@@ -437,6 +437,8 @@ class App(object):
 
     def _get_page_obj(self, path_info, method_d):
         """Get Page object."""
+        if path_info.find(self._get_static_file_prefix()) != -1:
+            return None
         for re_url in method_d.iterkeys():
             # path_info matching url
             match = re_url.match(path_info)
