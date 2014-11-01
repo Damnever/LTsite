@@ -35,21 +35,21 @@
 ##不扯淡行吗？
 ####**眼见为实** [http://d2ak.sinaapp.com/](http://d2ak.sinaapp.com/)
 ####本地使用
-1. clone 到本地
+- clone 到本地
 ```
  git clone git@github.com:Damnever/LTsite.git
 ```
-2. **Python2.7+ 还用说？**
-3. 解决依赖问题
+- **Python2.7+ 还用说？**
+- 解决依赖问题
 ```
 pip install jinja2
 pip install MySQLdb-Python
 ```
-4. 初始化数据库
+- 初始化数据库
 ```
 mysql -u root -p < site.sql
 ```
-5. 运行网站
+- 运行网站
 ```
 python run_server.py
 ```
