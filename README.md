@@ -33,6 +33,7 @@
 
 ---
 ##不扯淡行吗？
+####[Wiki ...](https://github.com/Damnever/LTsite/wiki)
 ####**眼见为实** [http://d2ak.sinaapp.com/](http://d2ak.sinaapp.com/)
 ####本地使用
 - clone 到本地
