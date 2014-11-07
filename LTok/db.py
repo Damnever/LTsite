@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-25 11:10:37 Sat
-    Last Modified: 2014-11-01 16:16:55 Sat
+    Last Modified: 2014-11-01 21:20:00 Sat
     Description:
         A module for operating database, include a ORM framework.
         -> https://github.com/michaelliao/transwarp/blob/master/transwarp/db.py
@@ -55,7 +55,6 @@ def init_db(user, passwd, db, host='localhost', port=3306, **kwargs):
     defaults = dict(use_unicode=True, charset='utf8', autocommit=False)
     for k, v in defaults.iteritems():
         params[k] = kwargs.pop(k, v)
-    print params
     params.update(kwargs)
     try:
         engine = _Engine(lambda: MySQLdb.connect(**params))
@@ -534,7 +533,7 @@ class Model(dict):
                     (cls.__primary_key__, cls.__table__))
         return num
 
-    def update(self):
+    def update(self, conditions, *args):
         kw = {}
         for k, v in self.__mappings__.iteritems():
             if v.updateable:
@@ -544,8 +543,11 @@ class Model(dict):
                     arg = v.default
                     setattr(self, k, arg)
                 kw[k] = arg
-        pk = self.__primary_key__
-        update_kw(self.__table__, '%s=?'%pk, getattr(self, pk), **kw)
+        if conditions:
+            update_kw(self.__table__, conditions, *args, **kw)
+        else:
+            pk = self.__primary_key__
+            update_kw(self.__table__, '%s=?'%pk, getattr(self, pk), **kw)
         return self
 
     def delete(self):
