@@ -5,7 +5,7 @@
 --------------------------------------------------------------------------------
     Author: Last_D
     Created Time: 2014-10-28 21:03:51 Tue
-    Last Modified: 2014-11-01 20:02:04 Sat
+    Last Modified: 2014-11-01 21:19:54 Sat
     Description:
         All URLs for my website.
     Change Activity:
@@ -52,9 +52,9 @@ class Login(Page):
         data =  self.request.data(username='', password='', rememberme='')
         print data.username, data.password
         if not data.username:
-            pass
+            self.redirect('/login')
         if not data.password:
-            pass
+            self.redirect('/login')
         user = User.select_one('name=?', data.username)
         print user.name, user.password
         if user.name == data.username and \
@@ -81,19 +81,19 @@ class Signin(Page):
         repassword = data.repassword
         email = data.email.strip().lower()
         if not username:
-            pass
+            self.redirect('/signin')
         if not password:
-            pass
+            self.redirect('/signin')
         if not repassword:
-            pass
+            self.redirect('/signin')
         if not data.email:
-            pass
+            self.redirect('/signin')
         if password != repassword:
-            pass
+            self.redirect('/signin')
         if User.select_one('name=?', username):
-            pass
+            self.redirect('/signin')
         if User.select_one('email=?', email):
-            pass
+            self.redirect('/signin')
         user = User(name=username, password=encrpt_password(password), \
                 email=email)
         user.insert()
