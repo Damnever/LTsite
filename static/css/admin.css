@@ -25,7 +25,7 @@ html, body{
 nav {
     border-collapse: collapse;
     border-spacing: 0;
-	width:605px;
+	width:486px;
 	-webkit-box-shadow:  0px 2px 1px 5px rgba(242, 242, 242, 0.1);
     box-shadow:  0px 2px 1px 5px rgba(242, 242, 242, 0.1);
 }
@@ -127,6 +127,15 @@ table {
 	color:#fff;
 }
 
+.zebra td .a {
+    text-decoration: none;
+    color:#fff;
+}
+
+.zebra td .a:hover {
+    text-decoration: underline;
+
+}
 
 /*Edite article*/
 fieldset {

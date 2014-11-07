@@ -35,8 +35,7 @@ body {
 
 .main {
     background: #FFFAFA;
-    max-width: 1090px;
-    margin: 5% 10% 2% 10%;
+    margin: 5% 9% 2% 9%;
     padding: 3% 7% 4% 7%;
     border: 2px solid #FFFAFA;
     border-radius: 10px 10px 10px;
@@ -46,7 +45,6 @@ body {
 	font-size: 100%;
 	line-height: 1.25;
 	font-weight: 300;
-    max-width: 1090px;
     margin: 5% 10% 2% 10%;
     background-color:#1E1E1E;
 	border:1px solid #0E0E0E;
@@ -73,7 +71,7 @@ body {
     font-size: 20px;    
     min-height: 500px;
     line-height: 1.6em;
-    padding: 1.5em .3em 1.5em .3em;
+    padding: 1.5em .5em 1.5em .5em;
     border-top: 5px solid #8B7355; /*#8B7355*/
     border-bottom: 5px solid #8B7355; /*#8B7355*/
     border-radius: 10px;
@@ -147,18 +145,28 @@ body {
     border-color: #4F4F4F transparent transparent transparent;
 }
 
-#footer a {
+#footer .boss {
     color: #FF7F00;
     text-decoration: none;
     font-family: "xk", Courier;
 }
 
-#footer a:hover {
+#footer .boss:hover {
     color: #FF4500;
     opacity: .8;
     text-shadow: 1px 1px 1px #1C1C1C;
 }
+#footer .admin{
+	color: #FF4500;
+    text-decoration: none;
+    text-shadow: 2px 2px 2px #1C1C1C;
+}
 
+#footer .admin:hover {
+	color: #FF4500;
+    text-decoration: none;
+    text-shadow: 2px 2px 2px #1C1C1C;
+}
 
 h1 a:hover,h1 a:focus {
 	opacity: .8;
