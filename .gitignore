@@ -1,0 +1,6 @@
+# ignore python create binary file, *.pyc
+*.pyc
+# ignore gedit backup file
+*~
+# ignore test directory
+test/
